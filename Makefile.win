@@ -1,0 +1,42 @@
+# Project: Pentrix
+# Makefile created by Dev-C++ 4.9.9.2
+
+CPP  = g++.exe -D__DEBUG__
+CC   = gcc.exe -D__DEBUG__
+WINDRES = windres.exe
+RES  = 
+OBJ  = OBJ/main.o OBJ/keyboard.o OBJ/display.o OBJ/sound.o OBJ/highscore.o $(RES)
+LINKOBJ  = OBJ/main.o OBJ/keyboard.o OBJ/display.o OBJ/sound.o OBJ/highscore.o $(RES)
+LIBS =  -L"lib" -mwindows -lmingw32 -lSDLmain -lSDL_ttf -lSDL -lSDL_mixer  -g3 -s 
+INCS =  -I"include" 
+CXXINCS =  -I"lib/gcc/mingw32/3.4.2/include"  -I"include/c++/3.4.2/backward"  -I"include/c++/3.4.2/mingw32"  -I"include/c++/3.4.2"  -I"include" 
+BIN  = BIN/Pentrix.exe
+CXXFLAGS = $(CXXINCS)   -O3 -g3
+CFLAGS = $(INCS) -Dmain=SDL_main   -O3 -g3
+RM = rm -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before BIN/Pentrix.exe all-after
+
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o "BIN\Pentrix.exe" $(LIBS)
+
+OBJ/main.o: main.c
+	$(CPP) -c main.c -o OBJ/main.o $(CXXFLAGS)
+
+OBJ/keyboard.o: keyboard.cpp
+	$(CPP) -c keyboard.cpp -o OBJ/keyboard.o $(CXXFLAGS)
+
+OBJ/display.o: display.cpp
+	$(CPP) -c display.cpp -o OBJ/display.o $(CXXFLAGS)
+
+OBJ/sound.o: sound.cpp
+	$(CPP) -c sound.cpp -o OBJ/sound.o $(CXXFLAGS)
+
+OBJ/highscore.o: highscore.cpp
+	$(CPP) -c highscore.cpp -o OBJ/highscore.o $(CXXFLAGS)
